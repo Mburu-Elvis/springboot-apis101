@@ -1,10 +1,12 @@
 package com.example.myKazi;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Employee {
@@ -15,6 +17,9 @@ public class Employee {
     private String lastName;
     private String phoneNumber;
     private String email;
+    
+    @OneToMany(mappedBy = "employee")
+    private List<Jobs> jobs;
 
     public Integer getId() {
         return id;
@@ -54,5 +59,13 @@ public class Employee {
 
     public String getNumber() {
         return phoneNumber;
+    }
+
+    public void setJobs(List<Jobs> jobs) {
+        this.jobs = jobs;
+    }
+
+    public List<Jobs> getJobs() {
+        return jobs;
     }
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 // import jakarta.persistence.Temporal;
 // import jakarta.persistence.TemporalType;
 import java.time.LocalDateTime;
@@ -44,9 +46,9 @@ public class Jobs {
 
     private LocalDateTime dateBidWon;
 
-    private Integer contractorId;
-
-    private Integer employeeId;
+    @ManyToOne
+    @JoinColumn(name="employeeId")
+    private Employee employee;
 
 
     public Integer getId() {
@@ -113,19 +115,12 @@ public class Jobs {
         return dateBidWon;
     }
 
-    public void setContractorId(Integer contractorId) {
-        this.contractorId = contractorId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
-    public Integer getContractorId() {
-        return contractorId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public Integer getEmployeeId() {
-        return employeeId;
-    }
 }

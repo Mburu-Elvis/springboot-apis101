@@ -1,9 +1,12 @@
 package com.example.myKazi;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,6 +21,9 @@ public class Contractors {
     private String phoneNumber;
     private String password;
     private LocalDateTime dateCreated;
+
+    @OneToMany(mappedBy = "contractor")
+    private List<Jobs> jobs;
 
     public void setId(Integer id) {
         this.id = id;
@@ -73,6 +79,14 @@ public class Contractors {
 
     public LocalDateTime getDateCreated() {
         return dateCreated;
+    }
+
+    public void setJobs(List<Jobs> jobs) {
+        this.jobs = jobs;
+    }
+
+    public List<Jobs> getJobs() {
+        return jobs;
     }
 
 }
