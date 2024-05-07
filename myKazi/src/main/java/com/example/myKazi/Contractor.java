@@ -10,7 +10,7 @@ import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
 
 @Entity
-public class Contractors {
+public class Contractor {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;

@@ -1,14 +1,17 @@
 package com.example.myKazi;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 // import jakarta.persistence.Temporal;
 // import jakarta.persistence.TemporalType;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Jobs {
@@ -47,8 +50,16 @@ public class Jobs {
     private LocalDateTime dateBidWon;
 
     @ManyToOne
-    @JoinColumn(name="employeeId")
+    @JoinColumn(name="employee_id")
     private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name="contractor_id")
+    private Contractor contractor;
+
+
+    @OneToMany(mappedBy = "bid", cascade=CascadeType.ALL)
+    private List<Bids> bids;
 
 
     public Integer getId() {
@@ -121,6 +132,22 @@ public class Jobs {
 
     public Employee getEmployee() {
         return employee;
+    }
+
+    public void setContractor(Contractor contractor) {
+        this.contractor = contractor;
+    }
+
+    public Contractor getContractor() {
+        return contractor;
+    }
+
+    public void setBids(List<Bids> bids) {
+        this.bids = bids;
+    }
+
+    public List<Bids> getBids() {
+        return bids;
     }
 
 }

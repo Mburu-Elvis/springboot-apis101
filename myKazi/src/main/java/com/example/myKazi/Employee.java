@@ -21,6 +21,9 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     private List<Jobs> jobs;
 
+    @OneToMany(mappedBy = "employee")
+    private List<Bids> bids;
+
     public Integer getId() {
         return id;
     }
@@ -67,5 +70,13 @@ public class Employee {
 
     public List<Jobs> getJobs() {
         return jobs;
+    }
+
+    public void setBids(List<Bids> bids) {
+        this.bids = bids;
+    }
+
+    public List<Bids> getBids() {
+        return bids;
     }
 }
