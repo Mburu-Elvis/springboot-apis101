@@ -44,7 +44,7 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String tLastName() {
+    public String getLastName() {
         return lastName;
     }
 
