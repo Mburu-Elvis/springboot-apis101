@@ -2,6 +2,7 @@ package com.example.myKazi;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,9 +22,16 @@ public class Contractor {
     private String phoneNumber;
     private String password;
     private LocalDateTime dateCreated;
-
-    @OneToMany(mappedBy = "contractor")
+    
+    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL)
     private List<Jobs> jobs;
+
+    public Contractor(Integer id) {
+        this.id = id;
+    }
+
+    public Contractor() {}
+
 
     public void setId(Integer id) {
         this.id = id;

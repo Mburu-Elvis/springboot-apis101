@@ -28,6 +28,9 @@ public class MainController {
     @Autowired
     private ContractorRepository contractorRepository;
 
+    @Autowired
+    private JobsRepository jobsRepository;
+
     @PostMapping(path="/employees")
     public  @ResponseBody ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
         Employee savedEmployee = employeeRepository.save(employee);
@@ -71,7 +74,10 @@ public class MainController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
 
-
+    @PostMapping(path="/jobs")
+    public @ResponseBody ResponseEntity<Jobs>  createJobs(@RequestBody Jobs job) {
+        Jobs savedJobs = jobsRepository.save(job);
+        return new ResponseEntity<>(savedJobs, HttpStatus.CREATED);
+    }
 }

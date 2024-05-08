@@ -38,6 +38,15 @@ public class Jobs {
         public String getStateDescription() {
             return stateDescription;
         }
+
+        // public static BidState fromString(String text) {
+        //     for (BidState state: BidState.values()) {
+        //         if (state.stateDescription.equalsIgnoreCase(text)) {
+        //             return state;
+        //         }
+        //     }
+        //     throw new IllegalArgumentException("No constant with text " + text + "found");
+        // }
     };
 
 
@@ -57,10 +66,8 @@ public class Jobs {
     @JoinColumn(name="contractor_id")
     private Contractor contractor;
 
-
-    @OneToMany(mappedBy = "job", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
     private List<Bids> bids;
-
 
     public Integer getId() {
         return id;

@@ -18,11 +18,14 @@ public class Bids {
     private LocalDateTime dateOfBid;
     
     @ManyToOne
+    @JoinColumn(name="job_id")
     private Jobs job;
 
     @ManyToOne
     @JoinColumn(name="employee_id")
     private Employee employee;
+
+
 
     public void setId(Integer id) {
         this.id = id;
