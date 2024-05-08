@@ -58,7 +58,7 @@ public class Jobs {
     private Contractor contractor;
 
 
-    @OneToMany(mappedBy = "bid", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "job", cascade=CascadeType.ALL)
     private List<Bids> bids;
 
 

@@ -15,12 +15,9 @@ public class Bids {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    private Integer jobId;
-
     private LocalDateTime dateOfBid;
     
     @ManyToOne
-    @JoinColumn(name="job_id")
     private Jobs job;
 
     @ManyToOne
@@ -34,16 +31,6 @@ public class Bids {
     public Integer getId() {
         return id;
     }
-
-    public void setJobId(Integer jobId) {
-        this.jobId = jobId;
-    }
-
-    public Integer getJobId() {
-        return jobId;
-    }
-
-
 
     public void setDateOfBid(LocalDateTime dateOfBid) {
         this.dateOfBid = dateOfBid;
