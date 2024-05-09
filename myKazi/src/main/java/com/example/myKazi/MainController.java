@@ -31,6 +31,9 @@ public class MainController {
     @Autowired
     private JobsRepository jobsRepository;
 
+    @Autowired
+    private BidsRepository bidsRepository;
+
     @PostMapping(path="/employees")
     public  @ResponseBody ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
         Employee savedEmployee = employeeRepository.save(employee);
@@ -80,4 +83,39 @@ public class MainController {
         Jobs savedJobs = jobsRepository.save(job);
         return new ResponseEntity<>(savedJobs, HttpStatus.CREATED);
     }
+
+    @GetMapping(path="/jobs")
+    public @ResponseBody Iterable<Jobs> getAllJobs() {
+        return jobsRepository.findAll();
+    }
+
+    @GetMapping(path="/jobs/{id}")
+    public @ResponseBody ResponseEntity<Jobs> getJobById (@PathVariable Integer id) {
+        Jobs job = jobsRepository.findById(id).orElse(null);
+
+        if (job != null) {
+            return new ResponseEntity<>(job, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @PostMapping(path="/bids")
+    public @ResponseBody ResponseEntity<Bids> createBids(@RequestBody Bids bid) {
+        Bids bidSaved = bidsRepository.save(bid);
+        System.out.println(bidSaved);
+        return new ResponseEntity<>(bidSaved, HttpStatus.CREATED);
+    }
+
+    @GetMapping(path="/bids")
+    public @ResponseBody Iterable<Bids> getAllBids() {
+        return bidsRepository.findAll();
+    }
+
+
+    public String getMethodName(@RequestParam String param) {
+        return new String();
+    }
+    
 }

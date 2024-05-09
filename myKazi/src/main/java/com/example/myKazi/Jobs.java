@@ -13,6 +13,8 @@ import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.batch.BatchProperties.Job;
+
 @Entity
 public class Jobs {
     @Id
@@ -23,31 +25,31 @@ public class Jobs {
 
     private LocalDateTime datePosted;
 
-    private BidState bidState;
+    // private BidState bidState;
 
-    public enum BidState {
-        ON("bid on"),
-        OFF("bid off");
+    // public enum BidState {
+    //     ON("bid on"),
+    //     OFF("bid off");
         
-        private String stateDescription;
+    //     private String stateDescription;
 
-        BidState(String stateDescription) {
-            this.stateDescription = stateDescription;
-        }
+    //     BidState(String stateDescription) {
+    //         this.stateDescription = stateDescription;
+    //     }
 
-        public String getStateDescription() {
-            return stateDescription;
-        }
+    //     public String getStateDescription() {
+    //         return stateDescription;
+    //     }
 
-        // public static BidState fromString(String text) {
-        //     for (BidState state: BidState.values()) {
-        //         if (state.stateDescription.equalsIgnoreCase(text)) {
-        //             return state;
-        //         }
-        //     }
-        //     throw new IllegalArgumentException("No constant with text " + text + "found");
-        // }
-    };
+    //     // public static BidState fromString(String text) {
+    //     //     for (BidState state: BidState.values()) {
+    //     //         if (state.stateDescription.equalsIgnoreCase(text)) {
+    //     //             return state;
+    //     //         }
+    //     //     }
+    //     //     throw new IllegalArgumentException("No constant with text " + text + "found");
+    //     // }
+    // };
 
 
     private Integer numberOfBids;
@@ -66,8 +68,16 @@ public class Jobs {
     @JoinColumn(name="contractor_id")
     private Contractor contractor;
 
-    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "job")
     private List<Bids> bids;
+
+    public Jobs() {}
+
+    public Jobs(Integer id, String jobTitle, Contractor contractor) {
+        this.id = id;
+        this.jobTitle = jobTitle;
+        this.contractor = contractor;
+    }
 
     public Integer getId() {
         return id;
@@ -93,13 +103,13 @@ public class Jobs {
         return datePosted;
     }
 
-    public void setBidState(BidState bidState) {
-        this.bidState = bidState;
-    }
+    // public void setBidState(BidState bidState) {
+    //     this.bidState = bidState;
+    // }
 
-    public BidState getBidState() {
-        return bidState;
-    }
+    // public BidState getBidState() {
+    //     return bidState;
+    // }
 
     public void setNumberOfBids(Integer numberOfBids) {
         this.numberOfBids = numberOfBids;

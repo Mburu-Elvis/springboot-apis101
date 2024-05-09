@@ -23,11 +23,13 @@ public class Contractor {
     private String password;
     private LocalDateTime dateCreated;
     
-    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "contractor")
     private List<Jobs> jobs;
 
-    public Contractor(Integer id) {
+
+    public Contractor(Integer id, String email) {
         this.id = id;
+        this.email = email;
     }
 
     public Contractor() {}
