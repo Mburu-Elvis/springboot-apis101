@@ -1,17 +1,17 @@
 package com.example.myKazi;
 
-import java.util.List;
+// import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.CascadeType;
+// import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+// import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+// import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -26,7 +26,6 @@ public class Contractor {
     private String phoneNumber;
     private String password;
     private LocalDateTime dateCreated;
-    private Integer jobId;
     
     // @OneToMany(mappedBy = "contractor")
     // private List<Jobs> jobs;
@@ -94,14 +93,6 @@ public class Contractor {
 
     public LocalDateTime getDateCreated() {
         return dateCreated;
-    }
-
-    public void setJobId(Integer jobId) {
-        this.jobId = jobId;
-    }
-
-    public Integer getJobId() {
-        return jobId; 
     }
 
     // public void setJobs(List<Jobs> jobs) {

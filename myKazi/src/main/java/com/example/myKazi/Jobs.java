@@ -1,17 +1,18 @@
 package com.example.myKazi;
 
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+// import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+// import jakarta.persistence.OneToMany;
+// import jakarta.persistence.JoinColumn;
+// import jakarta.persistence.ManyToOne;
 // import jakarta.persistence.Temporal;
 // import jakarta.persistence.TemporalType;
 import java.time.LocalDateTime;
-import java.util.List;
+// import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -61,7 +62,10 @@ public class Jobs {
 
     private LocalDateTime dateBidWon;
 
+    @Column(name="employee_id")
     private Integer employeeId;
+
+    private Integer contractorId;
 
     // @ManyToOne
     // @JoinColumn(name="employee_id")
@@ -76,7 +80,7 @@ public class Jobs {
 
     public Jobs() {}
 
-    public Jobs(Integer id, String jobTitle, Contractor contractor) {
+    public Jobs(Integer id, String jobTitle) {
         this.id = id;
         this.jobTitle = jobTitle;
         // this.contractor = contractor;
@@ -146,6 +150,14 @@ public class Jobs {
         return dateBidWon;
     }
 
+    public void setContractorId(Integer contractorId) {
+        this.contractorId = contractorId;
+    }
+    
+    public Integer getContractorId() {
+        return contractorId;
+    }
+
     public void setEmployeeId(Integer employeeId) {
         this.employeeId = employeeId;
     }
@@ -162,13 +174,6 @@ public class Jobs {
     //     return employee;
     // }
 
-    // public void setContractor(Contractor contractor) {
-    //     this.contractor = contractor;
-    // }
-
-    // public Contractor getContractor() {
-    //     return contractor;
-    // }
 
     // public void setBids(List<Bids> bids) {
     //     this.bids = bids;

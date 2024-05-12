@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 // import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -128,6 +127,29 @@ public class MainController {
 
     }
 
+    @PutMapping(path="/jobs/{id}/employee")
+    public ResponseEntity<Void> updateJobEmployee(@PathVariable Integer id, @RequestBody EmployeeIdDto employeeIdDto) {
+        Jobs job = jobsRepository.findById(id).orElse(null);
+
+        if (job != null) {
+            Integer employeeId = employeeIdDto.getNewEmployeeId();
+            Employee employee = employeeRepository.findById(employeeId).orElse(null);
+            if (employee != null) {
+                System.out.println(job.getEmployeeId());
+                job.setEmployeeId(employeeId);
+                System.out.println(job.getEmployeeId());
+                jobsRepository.save(job);
+
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
     @DeleteMapping(path="/jobs/{id}")
     public @ResponseBody ResponseEntity<Void> deleteJobById(Integer id) {
         if(jobsRepository.existsById(id)) {
@@ -149,6 +171,16 @@ public class MainController {
     public @ResponseBody Iterable<Bids> getAllBids() {
         return bidsRepository.findAll();
     }
+
+    @GetMapping(path="/bids/{id}")
+    public @ResponseBody ResponseEntity<Bids> getBidById(@PathVariable Integer id) {
+        Bids bid = bidsRepository.findById(id).orElse(null);
+        if (bid != null ) {
+            return new ResponseEntity<>(bid, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }    
 
     @DeleteMapping(path="/bids/{id}")
     public @ResponseBody ResponseEntity<Void> deleteBidById(Integer id) {
