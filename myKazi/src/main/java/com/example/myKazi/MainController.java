@@ -1,6 +1,5 @@
 package com.example.myKazi;
 
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -8,16 +7,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 // import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 // import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 
+
 @Controller
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @RequestMapping(path="/api/v1.0")
 public class MainController {
     
@@ -56,6 +63,16 @@ public class MainController {
         }
     }
 
+    @DeleteMapping(path="/employees/{id}")
+    public ResponseEntity<Void> deleteEmployeeById(@PathVariable Integer id) {
+        if (employeeRepository.existsById(id)) {
+            employeeRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping(path="/contractors")
     public @ResponseBody ResponseEntity<Contractor> createContractor(@RequestBody Contractor contractor) {
         Contractor savedContractor = contractorRepository.save(contractor);
@@ -73,6 +90,16 @@ public class MainController {
 
         if (contractor != null) {
             return new ResponseEntity<>(contractor, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping(path="/contractors/{id}")
+    public @ResponseBody ResponseEntity<Void> deleteContractorById(Integer id) {
+        if (contractorRepository.existsById(id)) {
+            contractorRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -101,6 +128,16 @@ public class MainController {
 
     }
 
+    @DeleteMapping(path="/jobs/{id}")
+    public @ResponseBody ResponseEntity<Void> deleteJobById(Integer id) {
+        if(jobsRepository.existsById(id)) {
+            jobsRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping(path="/bids")
     public @ResponseBody ResponseEntity<Bids> createBids(@RequestBody Bids bid) {
         Bids bidSaved = bidsRepository.save(bid);
@@ -111,6 +148,16 @@ public class MainController {
     @GetMapping(path="/bids")
     public @ResponseBody Iterable<Bids> getAllBids() {
         return bidsRepository.findAll();
+    }
+
+    @DeleteMapping(path="/bids/{id}")
+    public @ResponseBody ResponseEntity<Void> deleteBidById(Integer id) {
+        if(bidsRepository.existsById(id)) {
+            bidsRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 

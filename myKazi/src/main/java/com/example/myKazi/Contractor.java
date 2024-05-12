@@ -2,6 +2,8 @@ package com.example.myKazi;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,8 +11,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Contractor {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -22,9 +26,10 @@ public class Contractor {
     private String phoneNumber;
     private String password;
     private LocalDateTime dateCreated;
+    private Integer jobId;
     
-    @OneToMany(mappedBy = "contractor")
-    private List<Jobs> jobs;
+    // @OneToMany(mappedBy = "contractor")
+    // private List<Jobs> jobs;
 
 
     public Contractor(Integer id, String email) {
@@ -91,12 +96,20 @@ public class Contractor {
         return dateCreated;
     }
 
-    public void setJobs(List<Jobs> jobs) {
-        this.jobs = jobs;
+    public void setJobId(Integer jobId) {
+        this.jobId = jobId;
     }
 
-    public List<Jobs> getJobs() {
-        return jobs;
+    public Integer getJobId() {
+        return jobId; 
     }
+
+    // public void setJobs(List<Jobs> jobs) {
+    //     this.jobs = jobs;
+    // }
+
+    // public List<Jobs> getJobs() {
+    //     return jobs;
+    // }
 
 }

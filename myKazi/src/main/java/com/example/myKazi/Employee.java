@@ -2,6 +2,8 @@ package com.example.myKazi;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employee {
     
     @Id@GeneratedValue(strategy=GenerationType.AUTO)
@@ -17,12 +20,13 @@ public class Employee {
     private String lastName;
     private String phoneNumber;
     private String email;
+    // private Integer bidId;
     
-    @OneToMany(mappedBy = "employee")
-    private List<Jobs> jobs;
+    // @OneToMany(mappedBy = "employee")
+    // private List<Jobs> jobs;
 
-    @OneToMany(mappedBy = "employee")
-    private List<Bids> bids;
+    // @OneToMany(mappedBy = "employee")
+    // private List<Bids> bids;
 
     public Integer getId() {
         return id;
@@ -64,19 +68,27 @@ public class Employee {
         return phoneNumber;
     }
 
-    public void setJobs(List<Jobs> jobs) {
-        this.jobs = jobs;
-    }
+    // public void setBidId(Integer bidId) {
+    //     this.bidId = bidId;
+    // }
 
-    public List<Jobs> getJobs() {
-        return jobs;
-    }
+    // public Integer getBidId() {
+    //     return bidId;
+    // }
 
-    public void setBids(List<Bids> bids) {
-        this.bids = bids;
-    }
+    // public void setJobs(List<Jobs> jobs) {
+    //     this.jobs = jobs;
+    // }
 
-    public List<Bids> getBids() {
-        return bids;
-    }
+    // public List<Jobs> getJobs() {
+    //     return jobs;
+    // }
+
+    // public void setBids(List<Bids> bids) {
+    //     this.bids = bids;
+    // }
+
+    // public List<Bids> getBids() {
+    //     return bids;
+    // }
 }

@@ -12,10 +12,11 @@ import jakarta.persistence.ManyToOne;
 // import jakarta.persistence.TemporalType;
 import java.time.LocalDateTime;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import org.springframework.boot.autoconfigure.batch.BatchProperties.Job;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Jobs {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -60,23 +61,25 @@ public class Jobs {
 
     private LocalDateTime dateBidWon;
 
-    @ManyToOne
-    @JoinColumn(name="employee_id")
-    private Employee employee;
+    private Integer employeeId;
 
-    @ManyToOne
-    @JoinColumn(name="contractor_id")
-    private Contractor contractor;
+    // @ManyToOne
+    // @JoinColumn(name="employee_id")
+    // private Employee employee;
 
-    @OneToMany(mappedBy = "job")
-    private List<Bids> bids;
+    // @ManyToOne
+    // @JoinColumn(name="contractor_id")
+    // private Contractor contractor;
+
+    // @OneToMany(mappedBy = "job")
+    // private List<Bids> bids;
 
     public Jobs() {}
 
     public Jobs(Integer id, String jobTitle, Contractor contractor) {
         this.id = id;
         this.jobTitle = jobTitle;
-        this.contractor = contractor;
+        // this.contractor = contractor;
     }
 
     public Integer getId() {
@@ -143,28 +146,36 @@ public class Jobs {
         return dateBidWon;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Integer getEmployeeId() {
+        return employeeId;
     }
 
-    public void setContractor(Contractor contractor) {
-        this.contractor = contractor;
-    }
+    // public void setEmployee(Employee employee) {
+    //     this.employee = employee;
+    // }
 
-    public Contractor getContractor() {
-        return contractor;
-    }
+    // public Employee getEmployee() {
+    //     return employee;
+    // }
 
-    public void setBids(List<Bids> bids) {
-        this.bids = bids;
-    }
+    // public void setContractor(Contractor contractor) {
+    //     this.contractor = contractor;
+    // }
 
-    public List<Bids> getBids() {
-        return bids;
-    }
+    // public Contractor getContractor() {
+    //     return contractor;
+    // }
+
+    // public void setBids(List<Bids> bids) {
+    //     this.bids = bids;
+    // }
+
+    // public List<Bids> getBids() {
+    //     return bids;
+    // }
 
 }
